@@ -18,7 +18,7 @@ const SideBar = () => {
                     <ul className='nav-content'>
                         <li>
                             <a className='member' href='#'>
-                                <img src={img8} width="30px" height="30px"></img>
+                                <img src={img8} width="30px" height="30px" style={{padding: "10px"}}></img>
                                 <p className='text1'>Quản trị thành viên</p>
                             </a>
 
