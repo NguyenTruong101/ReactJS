@@ -7,7 +7,11 @@ import axios from "axios";
 import React, { useState, useEffect } from 'react';
 import Login from './Component/Login.js';
 import Homepage from './Component/homepage.js';
-import New from './Component/New';
+import New from './Component/New.js';
+import NganhNghe from './Component/DanhMuc/NganhNghe.js';
+import Khoa from './Component/DanhMuc/Khoa';
+import Lop from './Component/DanhMuc/Lop';
+
 
 
 import {
@@ -16,26 +20,30 @@ import {
   Link,
   Routes,
 } from "react-router-dom";
+import SideBar from './Component/Sidebar';
+import Navbar from './Component/Navbar';
+
+
 
 
 
 function App() {
 
 
-  
+
 
   return (
-    
-   
+
+
 
     <div>
-       {/* {<Homepage/>} */}
-      
+      {/* {<Homepage/>} */}
 
 
-       <Router>
-      <div>
-        {/* <ul>
+
+      <Router>
+        <div>
+          {/* <ul>
           <li>
             <Link to="/login">Login</Link>
           </li>
@@ -48,27 +56,39 @@ function App() {
         </ul>
 
         <hr /> */}
+          <div style={{ width: '100%', display: 'flex' }}>
+            {/* <SideBar/>
+          <div */}
+            <SideBar />
+            <div style={{ width: '80%' }}>
+              <Navbar />
 
-        
-          <Routes>
-            <Route exact path="/" element={<Login/>}>
-            </Route>
-            <Route exact path="/homepage" element={<Homepage/>}>
-            </Route>
-            <Route exact path='/new' element={<New/>}>
 
-            </Route>
-          </Routes>
-          
-          
-        
-      </div>
-    </Router>
+              <Routes>
+                <Route exact path="/login" element={<Login />}>
+                </Route>
+                <Route exact path="/homepage" element={<Homepage />}>
+                </Route>
+                <Route exact path='/new' element={<New />}>
+                </Route>
+                <Route exact path="/danh-muc/nganh-nghe" element={<NganhNghe/>}>
+                </Route>
+                <Route exact path="/danh-muc/khoa" element={<Khoa />}>
+                </Route>
+                <Route exact path="/danh-muc/lop" element={<Lop />}>
+                </Route>
+              </Routes>
+
+            </div>
+
+          </div>
+        </div>
+      </Router>
     </div>
 
-    
-     
-      
+
+
+
 
 
 

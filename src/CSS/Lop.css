@@ -1,0 +1,14 @@
+.body-modal {
+    display: flex;
+    width:100%;
+    gap:10%;
+    border-top: 1px solid #E2E3E9;
+}
+.foot {
+    display: flex;
+    margin-top: 59px;
+    justify-content: flex-end;
+    gap:10px;
+    border-top: 1px solid #E2E3E9;
+    padding-top: 11px;
+}

@@ -1,0 +1,27 @@
+.set-up{
+    display: none;
+}
+.picSet .seup-up .item{
+    display: block;
+}
+.picSet .seup-up .item{
+    padding: 10px 20px;
+}
+.picSet .seup-up .item:hover{
+    background-color:#F0F7FF ;
+}
+
+.body-modal {
+    display: flex;
+    width:100%;
+    gap:10%;
+    border-top: 1px solid #E2E3E9;
+}
+.foot {
+    display: flex;
+    margin-top: 59px;
+    justify-content: flex-end;
+    gap:10px;
+    border-top: 1px solid #E2E3E9;
+    padding-top: 11px;
+}

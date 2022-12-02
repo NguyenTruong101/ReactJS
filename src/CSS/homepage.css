@@ -1,3 +1,4 @@
+
 .container {
     margin: 0 auto;
     width: 100%;
@@ -9,7 +10,7 @@
 
     width: 20%;
     height: 718px;
-    float: left;
+    
 
 
 }
@@ -48,6 +49,16 @@ a {
 
 .DM{
     display: none;
+
+}
+ul li:hover .DM{
+    display: block;
+}
+ul li .DM .itemli{
+    padding: 10px 20px;
+}
+ul li .DM .itemli:hover{
+    background-color:#F0F7FF ;
 }
 .nav-content{
 
@@ -67,7 +78,9 @@ a {
 }
 .nav-top{
     display: flex;
+    padding: 35px 10px 20px 10px;
     flex-direction: row;
+    width: 100%;
     
 }
 .nav-icon{
@@ -76,6 +89,16 @@ a {
     flex-direction: row;
     margin-left: 70%;
     
+}
+
+.Page{
+    margin-top: 30%;
+    margin-left: 80%;
+    
+}
+.TotalPage{  
+    display: flex;
+    flex-direction: row;
 }
 
 

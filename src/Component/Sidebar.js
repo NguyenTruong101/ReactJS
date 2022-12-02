@@ -5,6 +5,9 @@ import img7 from '../assets/7.png';
 import img5 from '../assets/5.png';
 import img10 from '../assets/10.png';
 import '../CSS/homepage.css';
+import {
+    Link,
+  } from "react-router-dom";
 
 const SideBar = () => {
     return(
@@ -30,9 +33,9 @@ const SideBar = () => {
                                 <img src={img10} width="30px" height="30px" style={{padding: "10px"}}></img>
                             </a>
                             <ul className='DM'>
-                                <li>Ngành nghề</li>
-                                <li>Khóa</li>
-                                <li>Lớp</li>
+                                <li className='itemli'><Link to="/danh-muc/nganh-nghe">Ngành Nghề</Link></li>
+                                <li  className='itemli' ><Link to="/danh-muc/khoa">Khóa</Link></li>
+                                <li   className='itemli' ><Link to="/danh-muc/lop">Lớp</Link></li>
                             </ul>
 
                         </li>

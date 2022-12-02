@@ -14,7 +14,7 @@ const Navbar = () => {
                 </div>
             </div>
             <div className='nav-bottom'>
-                <p>Thành viên (0) </p>
+                {/* <p>Thành viên (0) </p> */}
 
             </div>
 
