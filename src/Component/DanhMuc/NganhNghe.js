@@ -18,21 +18,25 @@ const NganhNghe = () => {
         setShow(false);
     }
 
+    const Refresh = () => {
+        window.location.reload();
+    }
+
     const [MaNN, setMaNN] = useState("");
 
     const [NN, setNN] = useState("");
 
     const Add = () => {
-        request.post('/api/field', {
-            data: {
-                fieldDTO: {
-                    name: NN
-                },
-            }
+        request.post('/api/field',JSON.stringify({name:NN}),{
+
         }).then(res => (
             alert("Them thanh cong")
+
         ))
+        setShow(false);
+        Refresh();
     }
+
 
 
 
@@ -56,28 +60,25 @@ const NganhNghe = () => {
     return (
         <div className="NganhNghe">
 
-            <div style={{ display: 'flex', gap: '80%' }}>
-                <p>Khóa (20) </p>
+            <div style={{ display: 'flex', gap: '80%', borderBottom:'1px solid #ccc'}}>
+                <p style={{width:'30%'}}>Ngành nghề</p>
                 <button style={{
                     background: '#1890FF',
                     borderRadius: "3px white",
                     padding: "8px 16px",
                     border: '0px solid #000',
                     color: '#fff',
+                    width: '30%',
+                    height: "20%",
+                    cursor: 'pointer',
                 }} onClick={() => setShow(true)}> + Thêm Ngành Nghề</button>
             </div>
 
             <Modal show={show} close={Close} title='Them lop' width='70%' height='auto' >
                 <div style={{ display: 'flex', width: '100%', gap: "10%", borderTop: "1px solid #E2E3E9" }}>
+                   
                     <div style={{ width: '45%' }}>
-                        {MaNN}
-
-                        <p>Mã ngành nghề</p>
-                        <input type="text" placeholder='Nhập mã' style={{ width: '100%', padding: '8px 16px', border: '1px solid #E2E3E9', borderRadius: '3px', boxSizing: 'border-box' }} onChange={(event) => setMaNN(event.target.value)}></input>
-                    </div>
-
-                    <div style={{ width: '45%' }}>
-                        {NN}
+                        {/* {NN} */}
 
                         <p>Ngành nghề</p>
                         <input type="text" placeholder='Nhập ngành nghề' style={{ width: '100%', padding: '8px 16px', border: '1px solid #E2E3E9', borderRadius: '3px', boxSizing: 'border-box' }} onChange={(event) => setNN(event.target.value)}></input>
@@ -94,7 +95,7 @@ const NganhNghe = () => {
                     <thead style={{background:"#F0F0F0"}}>
                         <th>STT</th>
                         <th><img src={IMG11}></img></th>
-                        <th>Mã ngành nghề </th>
+                       
                         <th> Ngành nghề</th>
                     </thead>
                     <tbody>
@@ -108,7 +109,7 @@ const NganhNghe = () => {
                                     </div>
 
                                 </td>
-                                <td>{item.id}</td>
+                               
                                 <td>{item.name}</td>
                             </tr>
 

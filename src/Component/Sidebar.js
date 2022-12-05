@@ -21,8 +21,8 @@ const SideBar = () => {
                     <ul className='nav-content'>
                         <li>
                             <a className='member' href='#'>
-                                <img src={img8} width="30px" height="30px" style={{padding: "10px"}}></img>
-                                <p className='text1'>Quản trị thành viên</p>
+                                <img src={img8} width="30px" height="30px" style={{paddingLeft:"10px",paddingRight:"10px"}}></img>
+                                <Link className='text1' to="/thanh-vien">Quản trị thành viên</Link>
                             </a>
 
                         </li>
@@ -44,8 +44,12 @@ const SideBar = () => {
                                 <img src={img7} width="30px" height="30px" style={{padding: "10px"}}></img>
                                 <p>Đồ án</p>
                                 <img src={img10} width="30px" height="30px" style={{padding: "10px"}}></img>
-
                             </a>
+                            <ul className='DM'>
+                                <li className='itemli'><Link to="/danh-muc/quan-ly-dot">Quản lý đợt</Link></li>
+                                <li  className='itemli' ><Link to="/danh-muc/kho-de-tai">Kho đề tài</Link></li>
+                                
+                            </ul>
 
                         </li>
                         <li>

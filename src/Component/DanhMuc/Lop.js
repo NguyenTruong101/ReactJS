@@ -27,6 +27,7 @@ const Lop = () => {
                     padding: "8px 16px",
                     border: '0px solid #000',
                     color: '#fff',
+                    height: "20%",
                 }} onClick={() => setShow(true)}> + Thêm Lớp </button>
             </div>
             <Modal show={show} close={Close} title='Thêm Lớp' width="70%" height="auto">
@@ -57,22 +58,22 @@ const Lop = () => {
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td> <img className="picSet" src={IMG12} style={{ width: '100%',width:"70%",height:"50%"}}></img>
-                                <ul className="set-up">
-                                    <li className="itemli">Sửa</li>
-                                    <li className="itemli">Xóa</li>
-                                </ul>
+                            <td className="dropdown"> <img className="drop-img" src={IMG12} style={{ maxWidth: '100%'}}></img>
+                            <div className="drop-content">
+                                    <a onClick={()=> setShow(true)}>Sửa</a>
+                                    <a>Xóa</a>
+                                </div>
                             </td>
                             <td>CNPM8</td>
                             <td>D14</td>
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td> <img className="picSet" src={IMG12} style={{ width: '100%',width:"70%",height:"50%" }} ></img>
-                                <ul className="set-up">
-                                    <li className="itemli">Sửa</li>
-                                    <li className="itemli">Xóa</li>
-                                </ul>
+                            <td className="dropdown"> <img className="drop-img" src={IMG12} style={{ maxWidth: '100%'}} ></img>
+                            <div className="drop-content">
+                                    <a onClick={()=> setShow(true)}>Sửa</a>
+                                    <a>Xóa</a>
+                                </div>
                             </td>
                             <td>CNPM7</td>
                             <td>D14</td>

@@ -11,6 +11,8 @@ import New from './Component/New.js';
 import NganhNghe from './Component/DanhMuc/NganhNghe.js';
 import Khoa from './Component/DanhMuc/Khoa';
 import Lop from './Component/DanhMuc/Lop';
+import ThanhVien from './Component/ThanhVien/ThanhVien';
+
 
 
 
@@ -67,7 +69,7 @@ function App() {
               <Routes>
                 <Route exact path="/login" element={<Login />}>
                 </Route>
-                <Route exact path="/homepage" element={<Homepage />}>
+                <Route exact path="/thanh-vien" element={<ThanhVien />}>
                 </Route>
                 <Route exact path='/new' element={<New />}>
                 </Route>
