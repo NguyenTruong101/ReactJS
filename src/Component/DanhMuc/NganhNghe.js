@@ -4,15 +4,17 @@ import axios from "axios";
 import { useState, useEffect } from 'react';
 import request from "../../utils/request";
 import Modal from './Modal';
+import IMG12 from '../../assets/12.png';
+import '../../CSS/NganhNghe.css';
+
 
 
 const NganhNghe = () => {
     const [data, setData] = useState([]);
-    const [page, setPage] = useState(1);
-    const [size, setSize] = useState(3);
+
 
     const [show, setShow] = useState(false);
-    const [totalPage, setTotalPage] = useState(5);
+
 
     const Close = () => {
         setShow(false);
@@ -22,20 +24,33 @@ const NganhNghe = () => {
         window.location.reload();
     }
 
-    const [MaNN, setMaNN] = useState("");
+
 
     const [NN, setNN] = useState("");
 
     const Add = () => {
-        request.post('/api/field',JSON.stringify({name:NN}),{
+        request.post('/api/field', JSON.stringify({ name: NN }), {
 
-        }).then(res => (
-            alert("Them thanh cong")
-
-        ))
+        })
         setShow(false);
         Refresh();
     }
+
+    const Delete = (id) => {
+        request.delete(`/api/field/${id}`,).then(res => {
+            alert("Xóa thành công");
+            Refresh();
+
+        });
+
+    }
+
+
+    
+
+    const [page, setPage] = useState(1);
+    const [size, setSize] = useState(5);
+    const [totalPage, setTotalPage] = useState(0);
 
 
 
@@ -54,14 +69,18 @@ const NganhNghe = () => {
             console.log(res.data);
             setData(res.data);
 
+            console.log(res.data.length);
 
-        })
-    }, [])
+
+            setTotalPage(Math.ceil(res.data.length / size));
+
+        });
+    }, [page])
     return (
         <div className="NganhNghe">
 
-            <div style={{ display: 'flex', gap: '80%', borderBottom:'1px solid #ccc'}}>
-                <p style={{width:'30%'}}>Ngành nghề</p>
+            <div style={{ display: 'flex', gap: '80%', borderBottom: '1px solid #ccc' }}>
+                <p style={{ width: '30%' }}>Ngành nghề</p>
                 <button style={{
                     background: '#1890FF',
                     borderRadius: "3px white",
@@ -76,7 +95,7 @@ const NganhNghe = () => {
 
             <Modal show={show} close={Close} title='Them lop' width='70%' height='auto' >
                 <div style={{ display: 'flex', width: '100%', gap: "10%", borderTop: "1px solid #E2E3E9" }}>
-                   
+
                     <div style={{ width: '45%' }}>
                         {/* {NN} */}
 
@@ -92,24 +111,25 @@ const NganhNghe = () => {
             </Modal>
             <div>
                 <table style={{ width: '100%' }}>
-                    <thead style={{background:"#F0F0F0"}}>
+                    <thead style={{ background: "#F0F0F0" }}>
                         <th>STT</th>
-                        <th><img src={IMG11}></img></th>
-                       
+                        <td style={{ width: '4%' }}><img src={IMG11}></img></td>
                         <th> Ngành nghề</th>
                     </thead>
                     <tbody>
                         {data.map((item, index) => (
                             <tr>
-                                <td style={{ width: '4%', textAlign: "center" }}>1</td>
-                                <td style={{ width: '8%' }}>
-                                    <div style={{ display: 'flex', width: "100%", justifyContent: 'center' }}>
-                                        <button onClick={() => setShow(true)}>Sua</button>
-                                        <button>Xoa</button>
+                                <td style={{ width: '4%', textAlign: "center" }}>{index + 1}</td>
+                                <td className='dropdown'><img className='drop-img' src={IMG12}></img>
+                                    <div className='drop-content' key={index}>
+                                        <button>Sửa</button>
+                                        <button onClick={() => {
+                                            console.log(item);
+                                            Delete(item.id);
+                                        }}>Xóa</button>
                                     </div>
-
                                 </td>
-                               
+
                                 <td>{item.name}</td>
                             </tr>
 

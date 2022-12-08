@@ -29,7 +29,7 @@ const Khoa = () => {
 
         request.get('/api/course', {
             params: {
-                
+
 
             },
             data: {
@@ -46,7 +46,7 @@ const Khoa = () => {
 
     return (
         <div className="Khoa">
-            <div style={{ display: 'flex', gap: '85%',borderBottom:"1px solid #ccc"}}>
+            <div style={{ display: 'flex', gap: '85%', borderBottom: "1px solid #ccc" }}>
                 <p>Khóa (20) </p>
                 <button style={{
                     background: '#1890FF',
@@ -56,8 +56,8 @@ const Khoa = () => {
                     color: '#fff',
                     cursor: 'pointer',
                     height: "20%",
-                    marginTop:"12px",
-                    
+                    marginTop: "12px",
+
 
                 }} onClick={() => setShow(true)}> + Thêm Khóa</button>
             </div>
@@ -91,7 +91,7 @@ const Khoa = () => {
                             <td>1</td>
                             <td className="dropdown"><img className="drop-img" src={IMG12} style={{ maxWidth: '100%' }}></img>
                                 <div className="drop-content">
-                                    <a onClick={()=> setShow(true)}>Sửa</a>
+                                    <a onClick={() => setShow(true)}>Sửa</a>
                                     <a>Xóa</a>
                                 </div>
                             </td>
@@ -102,7 +102,7 @@ const Khoa = () => {
                             <td>2</td>
                             <td className="dropdown"> <img className="drop-img" src={IMG12} style={{ maxWidth: '100%' }} ></img>
                                 <div className="drop-content">
-                                    <a onClick={()=> setShow(true)}>Sửa</a>
+                                    <a onClick={() => setShow(true)}>Sửa</a>
                                     <a>Xóa</a>
                                 </div>
                             </td>
@@ -110,21 +110,21 @@ const Khoa = () => {
                             <td>2020</td>
                         </tr>
                         {/* {data.map((item, index) => ( */}
-                        {data.map((item, index) =>(
-                             <tr>
-                        <td>3</td>
-                            <td className="dropdown"> <img className="drop-img" src={IMG12} style={{ maxWidth: '100%' }} ></img>
-                                <div className="drop-content">
-                                    <a onClick={()=> setShow(true)}>Sửa</a>
-                                    <a>Xóa</a>
-                                </div>
-                            </td>
-                            <td>{item.id}</td>
-                            <td>{item.name}</td>
+                        {data.map((item, index) => (
+                            <tr>
+                                <td>3</td>
+                                <td className="dropdown"> <img className="drop-img" src={IMG12} style={{ maxWidth: '100%' }} ></img>
+                                    <div className="drop-content">
+                                        <a onClick={() => setShow(true)}>Sửa</a>
+                                        <a>Xóa</a>
+                                    </div>
+                                </td>
+                                <td>{item.id}</td>
+                                <td>{item.name}</td>
 
-                        </tr>
+                            </tr>
                         ))}
-                       
+
                     </tbody>
                 </table>
             </div>

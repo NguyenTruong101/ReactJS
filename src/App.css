@@ -84,3 +84,7 @@ tr td .set-up:hover{
   text-decoration: none;
   cursor: pointer;
 }
+
+button{
+  cursor: pointer;
+}

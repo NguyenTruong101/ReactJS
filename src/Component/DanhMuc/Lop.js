@@ -7,16 +7,34 @@ import '../../CSS/Lop.css';
 import request from "../../utils/request";
 import Modal from './Modal';
 import { useActionData } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Lop = () => {
     const [ten,setTen] = useState("");
     const [name, setNam] = useState("");
     const [show, setShow] = useState(false);
 
+    const [data, setData] = useState([]);
+
     const Close = () => {
         setShow(false)
     }
+
+   useEffect(() => {
+    request.get('/api/class',{
+        params:{
+
+        },
+        data:{
+
+        },
+    }).then(res =>{
+        console.log(res.data);
+        // setData(res.data);
+
+    })
+   })
+
     return (
         <div className="Lop">
             <div style={{ display: 'flex', gap: '85%' }}>

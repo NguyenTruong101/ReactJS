@@ -6,13 +6,18 @@ import IMG12 from '../../assets/12.png';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import request from "../../utils/request";
-import axios from 'axios';
+import SideBar from '../Sidebar';
+import Navbar from '../Navbar';
+
 
 
 
 
 const Member = () => {
     const [data, setData] = useState([]);
+
+    const totalElement = 0;
+    
 
 
     useEffect(() => {
@@ -29,6 +34,8 @@ const Member = () => {
         }).then(res => {
             console.log(res.data);
             setData(res.data);
+
+            console.log(res.data.length);
 
 
         })
@@ -84,7 +91,7 @@ const Member = () => {
                                 <td>{item.email}</td>
                                 <td>{item.address}</td>
                                 <td>{item.gender == 1 ? 'Nam':'Nu'}</td>
-                                <td>{item.birthday_end}</td>
+                                <td>{item.birthday_start}</td>
                             </tr>
 
                         ))}

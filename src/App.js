@@ -32,38 +32,21 @@ import Navbar from './Component/Navbar';
 function App() {
 
 
-
-
   return (
 
 
 
     <div>
-      {/* {<Homepage/>} */}
+      
 
 
 
       <Router>
         <div>
-          {/* <ul>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/homepage">Home Page</Link>
-          </li>
-          <li>
-            <Link to="/dashboard">Dashbo</Link>
-          </li>
-        </ul>
-
-        <hr /> */}
           <div style={{ width: '100%', display: 'flex' }}>
-            {/* <SideBar/>
-          <div */}
-            <SideBar />
+            <SideBar/>
             <div style={{ width: '80%' }}>
-              <Navbar />
+              <Navbar/>
 
 
               <Routes>
@@ -85,13 +68,8 @@ function App() {
 
           </div>
         </div>
-      </Router>
+      </Router> 
     </div>
-
-
-
-
-
 
 
   )

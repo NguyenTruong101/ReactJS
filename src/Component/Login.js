@@ -5,6 +5,14 @@ import IMG2 from '../assets/2.png';
 import '../CSS/login.css';
 import { Navigate } from "react-router-dom";
 
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Routes,
+  } from "react-router-dom";
+
+
 
 
 const Login = ()  => {
@@ -31,11 +39,13 @@ const Login = ()  => {
     
 
         <div>
+
+   
     
-          <div>
+          {/* <div>
            
                 <div>Token la: {token}</div>
-          </div>
+          </div> */}
           <div className='header'>
             <p className='text-header'>Đăng Nhập</p>
             
@@ -56,7 +66,7 @@ const Login = ()  => {
           </div>
     
     
-          <button type='submit' className='login'  onClick={()=>handleSubmit()}>Log In</button>
+          <button type='submit' className='login'  onClick={()=>handleSubmit()}><Link to="/ThanhVien">Log In</Link></button>
     
     
           <img className='img1' src={IMG1}></img>
