@@ -10,14 +10,41 @@ import { useActionData } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Lop = () => {
-    const [ten,setTen] = useState("");
-    const [name, setNam] = useState("");
     const [show, setShow] = useState(false);
 
     const [data, setData] = useState([]);
 
     const Close = () => {
         setShow(false)
+    }
+    const [change, setChange] = useState(0);
+    const Refesh = () => {
+        setChange(Date.now());
+    }
+
+    const [id, setId] = useState("");
+    const [name, setName] = useState("");
+    const Add = () => {
+        const classid = {id:id, name:name}
+        const value = JSON.stringify(classid);
+        console.log(value);
+        request({
+            method: 'POST',
+            url: '/api/class',
+            params: {
+                
+            },
+            data: value,
+            headers: {
+                'Content-Type': 'application/json',
+            }
+            // query,body
+        }).then(res => {
+            alert('Them thanh cong !!!');
+            Refesh();
+            Close();
+        })
+
     }
 
    useEffect(() => {
@@ -46,22 +73,23 @@ const Lop = () => {
                     border: '0px solid #000',
                     color: '#fff',
                     height: "20%",
+                    marginTop:'12px',
                 }} onClick={() => setShow(true)}> + Thêm Lớp </button>
             </div>
             <Modal show={show} close={Close} title='Thêm Lớp' width="70%" height="auto">
                 <div className="body-modal">
                     <div style={{ width: '45%' }}>
                         <p>Tên Lớp</p>
-                        <input type="text" placeholder='Nhập tên lớp' style={{ width: '100%', padding: '8px 16px', border: '1px solid #E2E3E9', borderRadius: '3px', boxSizing: 'border-box' }} onChange={(event) => setTen(event.target.value)}></input>
+                        <input type="text" placeholder='Nhập tên lớp' style={{ width: '100%', padding: '8px 16px', border: '1px solid #E2E3E9', borderRadius: '3px', boxSizing: 'border-box' }} onChange={(event) => setId(event.target.value)}></input>
                     </div>
                     <div style={{ width: '45%' }}>
                         <p>Khóa</p>
-                        <input type="text" placeholder='Chọn khóa' style={{ width: '100%', padding: '8px 16px', border: '1px solid #E2E3E9', borderRadius: '3px', boxSizing: 'border-box' }} onChange={(event) => setNam(event.target.value)}></input>
+                        <input type="text" placeholder='Chọn khóa' style={{ width: '100%', padding: '8px 16px', border: '1px solid #E2E3E9', borderRadius: '3px', boxSizing: 'border-box' }} onChange={(event) => setName(event.target.value)}></input>
                     </div>
                 </div>
                 <div className="foot">
                     <button style={{ padding: '8px 16px' }} onClick={() => Close()}>Hủy</button>
-                    <button style={{ padding: '8px 16px' }} >Thêm</button>
+                    <button style={{ padding: '8px 16px' }} onClick={() => Add()}>Thêm</button>
                 </div>
             </Modal>
 
@@ -96,6 +124,19 @@ const Lop = () => {
                             <td>CNPM7</td>
                             <td>D14</td>
                         </tr>
+                        {data.map((item, index) => (
+                            <tr>
+                                <td>{index+1}</td>
+                                <td className="dropdown"><img className="drop-img" src={IMG12} style={{maxWidth:'100%'}}></img>
+                                <div className="drop-content">
+                                    <button onClick={() => setShow(true)}>Sửa</button>
+                                    <button>Xóa</button>
+                                </div>
+                                </td>
+                                <td>{item.id}</td>
+                                <td>{item.name}</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>

@@ -15,12 +15,56 @@ import { useEffect, useState } from "react";
 
 
 const Khoa = () => {
-    const [ten, setTen] = useState("");
-    const [name, setNam] = useState("");
-    const [show, setShow] = useState(false);
 
+    const [show, setShow] = useState(false);
     const Close = () => {
         setShow(false)
+    }
+    const [change, setChange] = useState(0);
+    const Refesh = () => {
+        setChange(Date.now());
+    }
+
+    const [id, setId] = useState("");
+    const [name, setName] = useState("");
+    const Add = () => {
+        request({
+            method: 'POST',
+            url: '/api/course',
+            params: {
+                name: name,
+            },
+            // query,body
+            data:{
+
+            }
+        }).then(res => {
+            alert('Them thanh cong !!!');
+            Refesh();
+            Close();
+        })
+
+    }
+
+    const Delete = (id) =>{
+        request({
+            method: 'DELETE',
+            url: '/api/course/' + id,
+            params:{
+
+            },
+            data:{
+
+            }
+        }).then(res => {
+            alert('Xoa thanh cong !!!');
+            Refesh();
+        })
+    }
+
+
+    const Update = () => {
+        
     }
 
     const [data, setData] = useState([]);
@@ -41,7 +85,7 @@ const Khoa = () => {
 
 
         })
-    }, [])
+    }, [change])
 
 
     return (
@@ -65,16 +109,33 @@ const Khoa = () => {
                 <div className="body-modal">
                     <div style={{ width: '45%' }}>
                         <p>Tên Khóa</p>
-                        <input type="text" placeholder='Nhập tên khóa' style={{ width: '100%', padding: '8px 16px', border: '1px solid #E2E3E9', borderRadius: '3px', boxSizing: 'border-box' }} onChange={(event) => setTen(event.target.value)}></input>
+                        <input type="text" placeholder='Nhập tên khóa' style={{ width: '100%', padding: '8px 16px', border: '1px solid #E2E3E9', borderRadius: '3px', boxSizing: 'border-box' }} onChange={(event) => setId(event.target.value)}></input>
                     </div>
                     <div style={{ width: '45%' }}>
                         <p>Năm bắt đầu</p>
-                        <input type="text" placeholder='Nhập năm bắt đầu ' style={{ width: '100%', padding: '8px 16px', border: '1px solid #E2E3E9', borderRadius: '3px', boxSizing: 'border-box' }} onChange={(event) => setNam(event.target.value)}></input>
+                        <input type="text" placeholder='Nhập năm bắt đầu ' style={{ width: '100%', padding: '8px 16px', border: '1px solid #E2E3E9', borderRadius: '3px', boxSizing: 'border-box' }} onChange={(event) => setName(event.target.value)}></input>
                     </div>
                 </div>
                 <div className="foot">
                     <button style={{ padding: '8px 16px' }} onClick={() => Close()}>Hủy</button>
-                    <button style={{ padding: '8px 16px' }} >Thêm</button>
+                    <button style={{ padding: '8px 16px' }} onClick={() => Add()}>Thêm</button>
+                </div>
+            </Modal>
+
+            <Modal show={show} close={Close} title='Sửa Khóa' width="70%" height="auto">
+                <div className="body-modal">
+                    <div style={{ width: '45%' }}>
+                        <p>Tên Khóa</p>
+                        <input type="text" placeholder='Nhập tên khóa' style={{ width: '100%', padding: '8px 16px', border: '1px solid #E2E3E9', borderRadius: '3px', boxSizing: 'border-box' }} onChange={(event) => setId(event.target.value)}></input>
+                    </div>
+                    <div style={{ width: '45%' }}>
+                        <p>Năm bắt đầu</p>
+                        <input type="text" placeholder='Nhập năm bắt đầu ' style={{ width: '100%', padding: '8px 16px', border: '1px solid #E2E3E9', borderRadius: '3px', boxSizing: 'border-box' }} onChange={(event) => setName(event.target.value)}></input>
+                    </div>
+                </div>
+                <div className="foot">
+                    <button style={{ padding: '8px 16px' }} onClick={() => Close()}>Hủy</button>
+                    <button style={{ padding: '8px 16px' }} onClick={() => Add()}>Thêm</button>
                 </div>
             </Modal>
 
@@ -87,36 +148,19 @@ const Khoa = () => {
                         <th>Năm bắt đầu</th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td className="dropdown"><img className="drop-img" src={IMG12} style={{ maxWidth: '100%' }}></img>
-                                <div className="drop-content">
-                                    <a onClick={() => setShow(true)}>Sửa</a>
-                                    <a>Xóa</a>
-                                </div>
-                            </td>
-                            <td>D14</td>
-                            <td>2019</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td className="dropdown"> <img className="drop-img" src={IMG12} style={{ maxWidth: '100%' }} ></img>
-                                <div className="drop-content">
-                                    <a onClick={() => setShow(true)}>Sửa</a>
-                                    <a>Xóa</a>
-                                </div>
-                            </td>
-                            <td>D15</td>
-                            <td>2020</td>
-                        </tr>
+                       
                         {/* {data.map((item, index) => ( */}
                         {data.map((item, index) => (
                             <tr>
-                                <td>3</td>
+                                <td>{index+1}</td>
                                 <td className="dropdown"> <img className="drop-img" src={IMG12} style={{ maxWidth: '100%' }} ></img>
                                     <div className="drop-content">
-                                        <a onClick={() => setShow(true)}>Sửa</a>
-                                        <a>Xóa</a>
+                                        <button>Sửa</button>
+                                        <button onClick={() => {
+                                            console.log(item);
+                                            Delete(item.id);
+
+                                        }}>Xóa</button>
                                     </div>
                                 </td>
                                 <td>{item.id}</td>

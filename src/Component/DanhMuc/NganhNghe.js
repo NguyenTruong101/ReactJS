@@ -6,34 +6,62 @@ import request from "../../utils/request";
 import Modal from './Modal';
 import IMG12 from '../../assets/12.png';
 import '../../CSS/NganhNghe.css';
+import { render } from '@testing-library/react';
 
 
 
 const NganhNghe = () => {
     const [data, setData] = useState([]);
+    const [change, setChange] = useState(0);
+
 
 
     const [show, setShow] = useState(false);
 
+    const [editshow, setEditshow] = useState(false);
+
+    const [saveitem, setSaveitem] = useState([]);
+
 
     const Close = () => {
         setShow(false);
+        setEditshow(false);
     }
 
     const Refresh = () => {
-        window.location.reload();
+        // window.location.reload();
+        setChange(Date.now());
     }
+
+
 
 
 
     const [NN, setNN] = useState("");
 
-    const Add = () => {
-        request.post('/api/field', JSON.stringify({ name: NN }), {
+    const [savename, setSavename] = useState("");
 
+    const Add = () => {
+        // request.post('/api/field', JSON.stringify({ name: NN }), {
+
+        // })
+        // setShow(false);
+        // Refresh();
+        request({
+            method: 'POST',
+            url: '/api/field',
+            // JSON.stringify({ name: NN}),
+            params: {
+                name: NN,
+            },
+            data: {
+
+            }
+        }).then(res => {
+            alert('Them thanh cong !!!')
+            Refresh();
+            Close();
         })
-        setShow(false);
-        Refresh();
     }
 
     const Delete = (id) => {
@@ -45,12 +73,45 @@ const NganhNghe = () => {
 
     }
 
+    const Update = (id) => {
+        console.log(saveitem);
+        request({
+            method: 'PUT',
+            url: '/api/field/' + saveitem.id,
+            params: {
+                name: savename,
+            },
+            data: {
 
-    
+            }
+        }).then(res => {
+            alert("Update thanh cong !!!");
+            Refresh();
+            Close();
+        })
+    }
+
+
+
 
     const [page, setPage] = useState(1);
-    const [size, setSize] = useState(5);
+    const [size, setSize] = useState(4);
     const [totalPage, setTotalPage] = useState(0);
+    const [newdata, setNewdata] = useState([]);
+    // const [startindex, setStartindex] = useState();
+    // const startindex = 0;
+
+    const handleData = () => {
+        setNewdata(data.slice((page - 1) *size,page *size));
+        // startindex = ((page-1) * size) +index+ 1;
+        console.log('render')
+    }
+
+    useEffect(() => {
+        handleData();
+    },[data,page])
+
+   
 
 
 
@@ -72,10 +133,19 @@ const NganhNghe = () => {
             console.log(res.data.length);
 
 
-            setTotalPage(Math.ceil(res.data.length / size));
+            // setTotalPage(Math.ceil(res.data.length / size));
+            // res.data.slice(0, 5)
+
+            // Phan trang
+            const resData = res.data
+            setData(resData);
+            // Tinh so trang
+            const totalRecord = resData.length;
+            setTotalPage(Math.ceil(totalRecord / size));
+            // setData(resData.slice(0, size))
 
         });
-    }, [page])
+    }, [page, change])
     return (
         <div className="NganhNghe">
 
@@ -92,7 +162,7 @@ const NganhNghe = () => {
                     cursor: 'pointer',
                 }} onClick={() => setShow(true)}> + Thêm Ngành Nghề</button>
             </div>
-
+            {/* Thêmm */}
             <Modal show={show} close={Close} title='Them lop' width='70%' height='auto' >
                 <div style={{ display: 'flex', width: '100%', gap: "10%", borderTop: "1px solid #E2E3E9" }}>
 
@@ -100,7 +170,7 @@ const NganhNghe = () => {
                         {/* {NN} */}
 
                         <p>Ngành nghề</p>
-                        <input type="text" placeholder='Nhập ngành nghề' style={{ width: '100%', padding: '8px 16px', border: '1px solid #E2E3E9', borderRadius: '3px', boxSizing: 'border-box' }} onChange={(event) => setNN(event.target.value)}></input>
+                        <input type="text" placeholder='Nhập ngành nghề' defaultValue={''} style={{ width: '100%', padding: '8px 16px', border: '1px solid #E2E3E9', borderRadius: '3px', boxSizing: 'border-box' }} onChange={(event) => setNN(event.target.value)}></input>
                     </div>
                 </div>
                 <div style={{ display: 'flex', marginTop: "59px", justifyContent: 'flex-end', gap: '10px', borderTop: "1px solid #E2E3E9", paddingTop: "11px" }}>
@@ -109,20 +179,41 @@ const NganhNghe = () => {
                 </div>
 
             </Modal>
+            {/* Sửa */}
+            <Modal show={editshow} close={Close} title='Sửa lop' width='70%' height='auto' >
+                <div style={{ display: 'flex', width: '100%', gap: "10%", borderTop: "1px solid #E2E3E9" }}>
+
+                    <div style={{ width: '45%' }}>
+                        {/* {NN} */}
+
+                        <p>Ngành nghề</p>
+                        <input type="text" placeholder='Nhập ngành nghề' defaultValue={saveitem?.name} style={{ width: '100%', padding: '8px 16px', border: '1px solid #E2E3E9', borderRadius: '3px', boxSizing: 'border-box' }} onChange={(event) => { setSavename(event.target.value) }}></input>
+                    </div>
+                </div>
+                <div style={{ display: 'flex', marginTop: "59px", justifyContent: 'flex-end', gap: '10px', borderTop: "1px solid #E2E3E9", paddingTop: "11px" }}>
+                    <button style={{ padding: '8px 16px', fontSize: '14px' }} onClick={() => Close()}>Hủy</button>
+                    <button style={{ padding: '8px 16px', fontSize: '14px' }} onClick={() => Update()}>Sửa</button>
+                </div>
+
+            </Modal>
             <div>
                 <table style={{ width: '100%' }}>
                     <thead style={{ background: "#F0F0F0" }}>
                         <th>STT</th>
                         <td style={{ width: '4%' }}><img src={IMG11}></img></td>
-                        <th> Ngành nghề</th>
+                        <th>Ngành nghề</th>
                     </thead>
                     <tbody>
-                        {data.map((item, index) => (
+                        {newdata.map((item, index) => (
                             <tr>
-                                <td style={{ width: '4%', textAlign: "center" }}>{index + 1}</td>
+                                <td style={{ width: '4%', textAlign: "center" }}>{((page-1)*(size)) + index +1}</td>
                                 <td className='dropdown'><img className='drop-img' src={IMG12}></img>
                                     <div className='drop-content' key={index}>
-                                        <button>Sửa</button>
+                                        <button onClick={() => {
+                                            setEditshow(true)
+                                            setSaveitem(item)
+                                            console.log(item)
+                                        }}>Sửa</button>
                                         <button onClick={() => {
                                             console.log(item);
                                             Delete(item.id);
