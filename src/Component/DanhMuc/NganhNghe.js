@@ -73,7 +73,7 @@ const NganhNghe = () => {
 
     }
 
-    const Update = (id) => {
+    const Update = () => {
         console.log(saveitem);
         request({
             method: 'PUT',
@@ -242,6 +242,10 @@ const NganhNghe = () => {
                             onClick={() => {
                                 setPage(page - 1);
                             }}
+                            style={{
+                                width:'60px',
+                                height:'40px',
+                            }}
                         >
                             Trước
                         </button>
@@ -249,7 +253,9 @@ const NganhNghe = () => {
                         {[...Array(totalPage)].map((item, index) => (
                             <button
                                 style={{
-                                    background: index + 1 === page ? 'blue' : ''
+                                    background: index + 1 === page ? 'blue' : '',
+                                    width:'40px',
+                                    height:'40px',
                                 }}
                                 onClick={() => {
                                     setPage(index + 1);
@@ -264,10 +270,14 @@ const NganhNghe = () => {
                             onClick={() => {
                                 setPage(page + 1);
                             }}
+                            style={{
+                                width:'60px',
+                                height:'40px',
+                            }}
                         >
                             Sau
                         </button>
-                        <p> {totalPage}/trang </p>
+                        {/* <p>Tổng {totalPage} trang </p> */}
                     </div>
                 </div>
             </div>

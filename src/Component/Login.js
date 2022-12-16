@@ -66,7 +66,7 @@ const Login = ()  => {
           </div>
     
     
-          <button type='submit' className='login'  onClick={()=>handleSubmit()}><Link to="/ThanhVien">Log In</Link></button>
+          <button type='submit' className='login'  onClick={()=>handleSubmit()}>Log In</button>
     
     
           <img className='img1' src={IMG1}></img>

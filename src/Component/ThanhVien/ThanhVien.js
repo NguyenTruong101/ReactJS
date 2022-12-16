@@ -6,8 +6,8 @@ import IMG12 from '../../assets/12.png';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import request from "../../utils/request";
-import SideBar from '../Sidebar';
-import Navbar from '../Navbar';
+// import SideBar from '../Sidebar';
+// import Navbar from '../Navbar';
 
 
 
